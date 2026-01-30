@@ -1,5 +1,8 @@
 #ifdef RW_GL3
 #include "glad/glad.h"
+#if !defined(LIBRW_SDL2) && !defined(LIBRW_SDL3) && !defined(LIBRW_GLFW)
+#define LIBRW_GLFW
+#endif
 #ifdef LIBRW_SDL2
 #include <SDL.h>
 #elif defined(LIBRW_SDL3)
@@ -7,7 +10,7 @@
 #elif defined(LIBRW_GLFW)
 #include <GLFW/glfw3.h>
 #else
-not implemented
+#error "LIBRW_GL3_GFXLIB must be set to GLFW, SDL2, or SDL3"
 #endif
 #endif
 
@@ -25,7 +28,7 @@ struct EngineOpenParams
 #elif defined(LIBRW_GLFW)
 	GLFWwindow **window;
 #else
-    not implemented
+#error "LIBRW_GL3_GFXLIB must be set to GLFW, SDL2, or SDL3"
 #endif
 	int width, height;
 	const char *windowtitle;
